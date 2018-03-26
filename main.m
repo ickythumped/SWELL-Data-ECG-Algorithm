@@ -73,7 +73,7 @@ for j = start_iter+1:J
    % Compute f()
    f_idg(j) = f(j, k, theta_update, delta, u, mu);
    % Compute lambda
-   [lambda_j(j), integ_term(j)] = cif(j,k, u, theta_update, delta, f_idg(j), mu);
+   [lambda_j(j), integ_term(j)] = cif(j,k, u, theta_update, delta, f_idg(j), mu, integ_term(j-1));
 end
 
 %% Algorithm - with adptive filter
