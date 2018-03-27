@@ -9,5 +9,7 @@ findpeaks(HR_data, 'MinPeakHeight', min_height, 'MinPeakDistance', min_dist*fs)
 [peaks, locs] = findpeaks(HR_data, 'MinPeakHeight', min_height,...
     'MinPeakDistance', min_dist*fs);
 hold off
+
+
 end
 

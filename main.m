@@ -24,7 +24,14 @@ MinPeakDistance = 1/4;
 % N -> R-peaks vector in samples
 % H -> History vector
 [u, K, T, N, H] = init(HR_data, fs, U);
+syms t; %variable for computing integ_f & integ_df
 
+% R-R plot
+figure
+scatter(u, H, '*' , 'r')
+xlabel('time in seconds')
+ylabel('R-R intervals')
+title('R-R Plot')
 %% j division
 % J -> Divide [0,T] into J equal parts
 % delta -> Length of each part in seconds
@@ -49,9 +56,9 @@ Wvar_predict = ones(nparams+2, nparams+2); %Model parameter vector
 Wvar_update = zeros(nparams+2, nparams+2); %Model parameter vector
 mu = zeros(1, J); %mean of each interval
 sigma_square = zeros(1, J); %variance of each interval
-lambda_j = zeros(1, J); % lambda vector
+lambda_vec = zeros(1, J); % lambda vector
 integ_term = zeros(1, J);
-f_idg = zeros(1, J); %f() vector
+f_vec = zeros(1, J); %f() vector
 
 %% Initializations (Note: work to be done)
 theta_update = [0.834; -0.15; -0.25; 0.396]; %intitalizing theta(j|j)
@@ -62,21 +69,41 @@ theta_predict(nparams+2, start_iter) = mu(start_iter)^3./sigma_square(start_iter
 theta_update(nparams+2) = mu(start_iter)^3./sigma_square(start_iter)^2;
 covar_matrix = diag(theta_update);
 
+% del initializations
+
 %% Algorithm without adaptive filter
 
 for j = start_iter+1:J
    if(u(k+1) <= (j-1)*delta)
        k = k+1;
-   end   
+   end
+   
    % Compute mean
    mu(j) = mean_rate(k, H, nparams, theta_update);
+   
    % Compute f()
-   f_idg(j) = f(j, theta_update, delta, u(k), mu(j));
-   % Compute lambda
-   [lambda_j(j), integ_term(j)] = cif(j,k, u, theta_update, delta, f_idg(j), mu);
+   f_vec(j) = f(j, theta_update(end), delta, u(k), mu(j));
+   
+   % Compute sym_f() and integ_f()
+   f_eq = sym_f(t, theta_update(end), u(k), mu(j));
+   integ_f_val = integ_f(j, delta, u_(k), f_eq); %have to complete this
+   
+   % Compute cif
+   lambda_vec(j) = cif(f_vec(j), integ_f_val);
+   
+   % Compute del
+   df_vec = df(j, k, nparams, delta, u(j), H, mu(j), f_vec(j), theta_update(end));
+   integ_df_vec = integ_df(df_vec); %have to code this
+   
+   d_lambda_vec = d_lambda(j, nparams, integ_f_val, df_vec, integ_df_vec, f_vec);
+   
+   d_loglambda_vec = d_loglambda(lambda_val, d_lambda_vec);
+   
+   % Compute del square
+   
 end
 
-%% Algorithm - with adptive filter
+%% Algorithm - with adaptive filter
 
 % for j = start_iter+1:J
 %    if(u(k+1) <= (j-1)*delta)

@@ -1,6 +1,6 @@
 function [df_vec] = df(j, k, nparams, delta, u_val, H, mu_val, f_val, theta_p_plus1)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+%Computing (df/dtheta) for all thetas
+%  dtheta = [dtheta(1) dtheta(2)... dtheta(p+2)]
 df_vec = zeros(1, nparams+2);
 
 expr1 = (f_val*theta_p_plus1)./(mu_val^3);
