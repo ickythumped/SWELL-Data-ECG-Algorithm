@@ -28,10 +28,13 @@ syms t; %variable for computing integ_f & integ_df
 
 % R-R plot
 figure
+hold on
 scatter(u, H, '*' , 'r')
+line(u, H)
 xlabel('time in seconds')
 ylabel('R-R intervals')
 title('R-R Plot')
+hold off
 %% j division
 % J -> Divide [0,T] into J equal parts
 % delta -> Length of each part in seconds
