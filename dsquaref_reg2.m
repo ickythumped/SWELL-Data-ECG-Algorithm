@@ -1,4 +1,4 @@
-function [dsquaref_reg2_mat] = dsquaref_reg2(j ,delta, u_val, H, mu_val, f_val, df_vec, theta_p_plus1)
+function [dsquaref_reg2_mat] = dsquaref_reg2(j, k, delta, u_val, H, mu_val, f_val, df_vec, theta_p_plus1)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
