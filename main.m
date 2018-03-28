@@ -89,7 +89,7 @@ for j = start_iter:J
    
    % Compute sym_f() and integ_f()
    f_eq = sym_f(t, theta_update(end), u(k), mu(j));
-   integ_f_val = integ_f(j, delta, u_(k), f_eq); %have to complete this
+   integ_f_val = integ_f(j, delta, u(k), f_eq); %have to complete this
    
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_val);
