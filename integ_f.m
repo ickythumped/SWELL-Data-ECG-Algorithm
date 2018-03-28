@@ -1,8 +1,7 @@
-function [integ_f_val] = integ_f(j, delta, u_val, sym_f_val)
+function [integ_f_val] = integ_f(j, delta, u_val, mu_val, theta_p_plus1)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-sym_f_val = double(sym_f_val);
-func_handle = @(t) sym_f_val;
-integ_f_val = integral(func_handle, u_val, j*delta);
+
+integ_f_val = integral(@(t) sym_f(t, theta_p_plus1, u_val, mu_val), u_val, j*delta);
 end
 

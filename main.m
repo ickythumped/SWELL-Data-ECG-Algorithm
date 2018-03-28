@@ -24,7 +24,7 @@ MinPeakDistance = 1/4;
 % N -> R-peaks vector in samples
 % H -> History vector
 [u, K, T, N, H] = init(HR_data, fs, U);
-syms t; %variable for computing integ_f & integ_df
+% syms t; %variable for computing integ_f & integ_df
 
 % R-R plot
 figure
@@ -88,8 +88,7 @@ for j = start_iter:J
    f_vec(j) = f(j, theta_update(end), delta, u(k), mu(j));
    
    % Compute sym_f() and integ_f()
-   f_eq = sym_f(t, theta_update(end), u(k), mu(j));
-   integ_f_val = integ_f(j, delta, u(k), f_eq); %have to complete this
+   integ_f_val = integ_f(j, delta, u(k), mu_val, theta_update(end)); %have to complete this
    
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_val);
