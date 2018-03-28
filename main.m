@@ -71,7 +71,7 @@ sigma_square(start_iter) = 0.75;
 theta_predict(nparams+2, start_iter) = mu(start_iter)^3./sigma_square(start_iter)^2;
 theta_update(nparams+2) = mu(start_iter)^3./sigma_square(start_iter)^2;
 covar_matrix = diag(theta_update);
-
+integ_f_val = 0;
 % del initializations
 
 %% Algorithm without adaptive filter
@@ -79,6 +79,7 @@ covar_matrix = diag(theta_update);
 for j = start_iter:J
    if(u(k+1) <= (j)*delta)
        k = k+1;
+       integ_f_val = 0;
    end
    
    % Compute mean
@@ -88,7 +89,8 @@ for j = start_iter:J
    f_vec(j) = f(j, theta_update(end), delta, u(k), mu(j));
    
    % Compute sym_f() and integ_f()
-   integ_f_val = integ_f(j, delta, u(k), mu_val, theta_update(end)); %have to complete this
+   integ_f_val = integ_f_val + integ_f(j, delta, ...
+       u(k), mu(j), theta_update(end)); %check after completing del and update eqs
    
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_val);
