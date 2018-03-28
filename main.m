@@ -46,12 +46,12 @@ nparams = 2; %Number of parameters in theta
 
 %wait for 'p' previous spikes
 k = 0;
-start_iter = 1;
+start_iter = 0;
 while(k ~= nparams)
-    if(u(k+1) <= (start_iter-1)*delta)
+    start_iter = start_iter+1;
+    if(u(k+1) <= (start_iter)*delta)
         k = k+1;
     end
-    start_iter = start_iter+1;
 end
 
 theta_predict = zeros(nparams + 2, J); %Model parameter vector (j|j-1)
@@ -76,8 +76,8 @@ covar_matrix = diag(theta_update);
 
 %% Algorithm without adaptive filter
 
-for j = start_iter+1:J
-   if(u(k+1) <= (j-1)*delta)
+for j = start_iter:J
+   if(u(k+1) <= (j)*delta)
        k = k+1;
    end
    
