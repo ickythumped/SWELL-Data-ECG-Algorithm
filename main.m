@@ -71,7 +71,12 @@ sigma_square(start_iter) = 0.75;
 theta_predict(nparams+2, start_iter) = mu(start_iter)^3./sigma_square(start_iter)^2;
 theta_update(nparams+2) = mu(start_iter)^3./sigma_square(start_iter)^2;
 covar_matrix = diag(theta_update);
+
+% integral value initializations
 integ_f_val = 0;
+integ_df_vec = zeros(1, nparams+2);
+integ_dfsquare_mat = zeros(nparams+2, nparams+2);
+
 % del initializations
 
 %% Algorithm without adaptive filter
@@ -96,12 +101,13 @@ for j = start_iter:J
    lambda_vec(j) = cif(f_vec(j), integ_f_val);
    
    % Compute del
-   df_vec = df(j, k, nparams, delta, u(j), H, mu(j), f_vec(j), theta_update(end));
-   integ_df_vec = integ_df(df_vec); %have to code this
+   df_vec = df(j, k, nparams, delta, u(k), H, mu(j), f_vec(j), theta_update(end));
+   integ_df_vec = integ_df(j, k, delta, nparams,...
+    u(k), H, mu(j), f_vec(j), theta_update(end)); %have to code this
    
    d_lambda_vec = d_lambda(j, nparams, integ_f_val, df_vec, integ_df_vec, f_vec);
    
-   d_loglambda_vec = d_loglambda(lambda_val, d_lambda_vec);
+   d_loglambda_vec = d_loglambda(lambda_vec(j), d_lambda_vec);
    
    % Compute del square
    

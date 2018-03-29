@@ -11,6 +11,6 @@ end
 
 expr3 = (-(expr2)^2)./(2*(mu_val^2)*(j*delta - u_val));
 expr4 = f_val./(2*theta_p_plus1);
-df_vec(nparams+2) = f_val*expr3*expr4;
+df_vec(nparams+2) = f_val*expr3 + expr4;
 end
 
