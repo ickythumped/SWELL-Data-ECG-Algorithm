@@ -1,0 +1,35 @@
+function [sym_dsquaref_val] = sym_dsquaref(a, b, t, k, nparams, u_val, H,...
+    mu_val, f_val, df_vec, theta_p_plus1)
+%UNTITLED5 Summary of this function goes here
+%   Detailed explanation goes here
+
+%% reg1
+expr1 = t - u_val;
+expr2 = (expr1 - mu_val)./(mu_val^3);
+expr3 = (2*mu_val - 3.*expr1)./(mu_val^4);
+df_dmu = (f_val.*theta_p_plus1.*(expr1 - mu_val))./(mu_val.^3);
+dsquaref_dmusquare = theta_p_plus1.*(df_dmu.*expr2 + f_val.*expr3);
+
+%% reg3
+expr4 = ((expr1 - u_val).^2)./(2.*(mu^2).*expr1);
+expr5 = df_vec(end) - f_val./theta_p_plus1;
+
+%% reg2
+expr6 = (f_val*(expr1 - mu_val))./mu_val^3;
+
+%%
+if (a <= nparams+1 && b <= nparams+1) %reg1
+    dsquaref_reg_val = dsquaref_dmusquare.*H(k-a+2).*H(k-b+2);
+
+elseif (a == nparams+2 && b == nparams+2) %reg3
+        dsquaref_reg_val = (df_vec(end).*(-expr4))...
+            + ((1/(2.*theta_p_plus1)).*expr5);
+
+% Please check again
+else
+    dsquaref_reg_val = ((1/(2*theta_p_plus1))*df_vec(a))...
+        - (df_vec(a)*expr4) + (expr6*H(k-a+2));
+end
+
+end
+

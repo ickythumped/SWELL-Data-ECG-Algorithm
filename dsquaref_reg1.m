@@ -1,4 +1,5 @@
-function [dsquaref_reg1_mat] = dsquaref_reg1(j, k, delta, nparams, u_val, H, mu_val, f_val, theta_p_plus1)
+function [dsquaref_reg1_mat] = dsquaref_reg1(j, k, delta, nparams, u_val,...
+    H, mu_val, f_val, theta_p_plus1)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 dsquaref_reg1_mat = zeros(nparams+1, nparams+1);
