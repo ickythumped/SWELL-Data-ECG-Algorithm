@@ -4,7 +4,7 @@ function [J, delta, n] = del_parts(T, fs, N)
 
 %% Computing J, delta
 %Divide [0,T] into J equal parts
-J = floor(T/(fs/32)); 
+J = floor(T/(fs/256)); 
 
 %Length of each part
 delta_samples = T/J; 
