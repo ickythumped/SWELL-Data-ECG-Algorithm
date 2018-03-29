@@ -79,10 +79,10 @@ lambda_vec = zeros(1, J); % lambda vector
 f_vec = zeros(1, J); %f() vector
 %% Algorithm without adaptive filter
 
-for j = 1:J
+for j = start_iter:J
     
    % Check for previous spike
-   if(u(k+1) <= (j)*delta)
+   if(u(k+1) <= j*delta)
        k = k+1;
        integ_f_value = 0;
        integ_df_vector = zeros(1, nparams+2);
@@ -135,9 +135,9 @@ for j = 1:J
 
    % Update Step
    theta_update = theta_predict(:, j)...
-       + ((Wvar_predict * d_loglambda_vec(:,end)) .* (n(j) - (lambda_vec(j)*delta)));
+       + ((Wvar_predict * d_loglambda_vec') .* (n(j) - (lambda_vec(j)*delta)));
     
-   Wvar_update = inv(inv(Wvar_predict) - dsquare_loglambda.*(n(j)...
+   Wvar_update = inv(inv(Wvar_predict) - dsquare_loglambda_mat.*(n(j)...
         - (lambda_vec(j)*delta)) - (d_loglambda_vec * (d_lambda_vec.*delta)')); 
 end
 
