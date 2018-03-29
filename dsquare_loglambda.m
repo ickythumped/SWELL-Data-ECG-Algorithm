@@ -1,4 +1,5 @@
-function [dsquare_loglambda_mat] = dsquare_loglambda(lambda_val, dlambda_vec, dsquare_lambda_mat)
+function [dsquare_loglambda_mat] = dsquare_loglambda(lambda_val, dlambda_vec,...
+    dsquare_lambda_mat)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
