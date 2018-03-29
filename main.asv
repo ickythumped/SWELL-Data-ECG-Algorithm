@@ -57,9 +57,6 @@ end
 theta_predict = zeros(nparams + 2, J); %Model parameter vector (j|j-1)
 mu = zeros(1, J); %mean of each interval
 sigma_square = zeros(1, J); %variance of each interval
-lambda_vec = zeros(1, J); % lambda vector
-integ_term = zeros(1, J);
-f_vec = zeros(1, J); %f() vector
 
 %% Initializations (Note: work to be done)
 theta_update = [0.834; -0.15; -0.25; 0]; %intitalizing theta(j|j)
@@ -72,16 +69,17 @@ covar_matrix = diag(theta_update);
 Wvar_predict = ones(nparams+2, nparams+2); %Model parameter vector
 Wvar_update = covar_matrix; %Model parameter vector
 
-% integral value initializations
+% Integral value initializations
 integ_f_value = 0;
 integ_df_vector = zeros(1, nparams+2);
 integ_dfsquare_matrix = zeros(nparams+2, nparams+2);
 
-% del initializations
-
+% Paramter initializations
+lambda_vec = zeros(1, J); % lambda vector
+f_vec = zeros(1, J); %f() vector
 %% Algorithm without adaptive filter
 
-for j = start_iter:J
+for j = 1:J
     
    % Check for previous spike
    if(u(k+1) <= (j)*delta)
@@ -100,6 +98,9 @@ for j = start_iter:J
    
    % Compute f()
    f_vec(j) = f(j, theta_predict(end, j), delta, u(k), mu(j));
+%    if (f_vec(j) == Inf)
+%        continue
+%    end
    
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
@@ -121,10 +122,10 @@ for j = start_iter:J
    
    % Compute del square
    dsquaref_mat = dsquaref(j, delta, k, nparams, u(k), H,...
-    mu(j), f(j), df_vec, theta_predict(end, j));
+    mu(j), f_vec(j), df_vec, theta_predict(end, j));
 
    integ_dfsquare_matrix = integ_dfsquare_matrix + integ_dfsquare(j,...
-       delta, k, nparams, u(k), H, mu(j), f(j), df_vec, theta_predict(end, j));
+       delta, k, nparams, u(k), H, mu(j), f_vec(j), df_vec, theta_predict(end, j));
 
    dsquare_lambda_mat = dsquare_lambda(f(j), integ_f_val, ...
     d_lambda_vec, df_vec, integ_df_vec, dsquaref_mat, integ_dfsquare_mat);
@@ -139,35 +140,4 @@ for j = start_iter:J
    Wvar_update = inv(inv(Wvar_predict) - dsquare_loglambda.*(n(j)...
         - (lambda_vec(j)*delta)) - (d_loglambda_vec * (d_lambda_vec.*delta)')); 
 end
-
-%% Algorithm - with adaptive filter
-
-% for j = start_iter+1:J
-%    if(u(k+1) <= (j-1)*delta)
-%        k = k+1;
-%    end
-%    
-%    % Prediction Step
-%    theta_predict(:, j)  = theta_update;
-%    Wvar_predict = Wvar_update + covar_matrix;
-%   
-%    % Compute mean
-%    mu(j) = mean_rate(k, H, nparams, theta_predict(:, j));
-%    
-%    % Compute f()
-%    f_idg(j) = f(j, theta_predict(nparams+2, j), delta, u(k), mu(j));
-%    
-%    % Compute lambda
-%    [lambda_j(:, j), integ_term] = cif(j,k, u, theta_predict(nparams+2, :), delta, f_idg(j), mu);
-%    
-%    % Compute derivates wrt theta
-%    
-%
-%    %update posterior parameters
-%    theta_update = theta_predict(:, j) + (Wvar_predict * del_loglambda(:,end) .* (n(j) - (lambda_j(j)*delta)));
-%    
-%    Wvar_update = inv(inv(Wvar_predict) - delsquare_loglambda.*(n(j) - (lambda_j(j)*delta))...
-%        - del_loglambda(:,end) * (del_lambda.*delta).'); 
-%     
-% end
 

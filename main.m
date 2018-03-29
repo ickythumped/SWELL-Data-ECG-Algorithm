@@ -98,9 +98,9 @@ for j = 1:J
    
    % Compute f()
    f_vec(j) = f(j, theta_predict(end, j), delta, u(k), mu(j));
-   if (f_vec(j) == Inf)
-       continue
-   end
+%    if (f_vec(j) == Inf)
+%        continue
+%    end
    
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
@@ -122,15 +122,15 @@ for j = 1:J
    
    % Compute del square
    dsquaref_mat = dsquaref(j, delta, k, nparams, u(k), H,...
-    mu(j), f(j), df_vec, theta_predict(end, j));
+    mu(j), f_vec(j), df_vec, theta_predict(end, j));
 
    integ_dfsquare_matrix = integ_dfsquare_matrix + integ_dfsquare(j,...
-       delta, k, nparams, u(k), H, mu(j), f(j), df_vec, theta_predict(end, j));
+       delta, k, nparams, u(k), H, mu(j), f_vec(j), df_vec, theta_predict(end, j));
 
-   dsquare_lambda_mat = dsquare_lambda(f(j), integ_f_val, ...
-    d_lambda_vec, df_vec, integ_df_vec, dsquaref_mat, integ_dfsquare_mat);
+   dsquare_lambda_mat = dsquare_lambda(nparams, f_vec(j), integ_f_value, ...
+    d_lambda_vec, df_vec, integ_df_vector, dsquaref_mat, integ_dfsquare_matrix);
 
-   dsquare_loglambda_mat = dsquare_loglambda(lambda(j), dlambda_vec,...
+   dsquare_loglambda_mat = dsquare_loglambda(nparams, lambda_vec(j), d_lambda_vec,...
     dsquare_lambda_mat);
 
    % Update Step

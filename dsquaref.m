@@ -37,7 +37,7 @@ end
 dsquaref_reg3_val = (df_vec(end)*(-expr4)) + ((1/(2*theta_p_plus1))*expr5);
 
 %% Creating Hessian matirx
-dsquaref_temp1 = [dsquaref_reg1_mat dsquaref_reg2_vec];
+dsquaref_temp1 = [dsquaref_reg1_mat dsquaref_reg2_vec'];
 dsquaref_temp2 = [dsquaref_reg2_vec dsquaref_reg3_val];
 dsquaref_mat = [dsquaref_temp1; dsquaref_temp2];
 
