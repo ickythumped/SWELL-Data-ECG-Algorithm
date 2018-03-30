@@ -27,7 +27,7 @@ hold off
 [J, delta, n] = del_parts(T, u);
 
 %% Parameter initialization
-nparams = 8; %Number of parameters in theta
+nparams = 9; %Number of parameters in theta
 
 %wait for 'p' previous spikes
 k = 0;
@@ -44,7 +44,7 @@ mu = zeros(1, J); %mean of each interval
 sigma_square = zeros(1, J); %variance of each interval
 
 %% Initializations (Note: work to be done)
-theta_update = [0.834; -0.15; -0.25; 0]; %intitalizing theta(j|j)
+theta_update = [3e-1; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 0]; %intitalizing theta(j|j)
 theta_predict(:, start_iter) = theta_update;
 mu(start_iter) = mean_rate(k, H, nparams, theta_update);
 sigma_square(start_iter) = 0.00075;
