@@ -113,34 +113,3 @@ for j = start_iter:J
    
 end
 
-%% Algorithm - with adaptive filter
-
-% for j = start_iter+1:J
-%    if(u(k+1) <= (j-1)*delta)
-%        k = k+1;
-%    end
-%    
-%    % Prediction Step
-%    theta_predict(:, j)  = theta_update;
-%    Wvar_predict = Wvar_update + covar_matrix;
-%   
-%    % Compute mean
-%    mu(j) = mean_rate(k, H, nparams, theta_predict(:, j));
-%    
-%    % Compute f()
-%    f_idg(j) = f(j, theta_predict(nparams+2, j), delta, u(k), mu(j));
-%    
-%    % Compute lambda
-%    [lambda_j(:, j), integ_term] = cif(j,k, u, theta_predict(nparams+2, :), delta, f_idg(j), mu);
-%    
-%    % Compute derivates wrt theta
-%    
-%
-%    %update posterior parameters
-%    theta_update = theta_predict(:, j) + (Wvar_predict * del_loglambda(:,end) .* (n(j) - (lambda_j(j)*delta)));
-%    
-%    Wvar_update = inv(inv(Wvar_predict) - delsquare_loglambda.*(n(j) - (lambda_j(j)*delta))...
-%        - del_loglambda(:,end) * (del_lambda.*delta).'); 
-%     
-% end
-
