@@ -144,14 +144,19 @@ for j = start_iter:J
 end
 
 %% R-R plot
-t = 0:delta:J*delta
+t = (1*delta:length(mu))*delta;
 figure
 hold on
-scatter(u, H, '*' , 'r')
-line(u, H)
+plot(u, H, 'r*')
+%line(u, H)
+plot(t, mu)
 xlabel('time in seconds')
 ylabel('R-R intervals')
 title('R-R Plot')
 hold off
-figure
-plot(mu)
+
+%% Mu_value
+final_mean = mean(mu);
+disp(final_mean);
+disp(mean(H));
+

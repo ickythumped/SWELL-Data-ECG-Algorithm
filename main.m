@@ -155,3 +155,8 @@ ylabel('R-R intervals')
 title('R-R Plot')
 hold off
 
+%% Mu_value
+final_mean = mean(mu);
+disp(final_mean);
+disp(mean(H));
+
