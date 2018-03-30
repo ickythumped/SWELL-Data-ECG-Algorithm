@@ -10,16 +10,6 @@ load('r_peaks.mat');
 % H -> History vector
 [u, K, T, H] = init(r_peaks);
 
-%% R-R plot
-figure
-hold on
-scatter(u, H, '*' , 'r')
-line(u, H)
-xlabel('time in seconds')
-ylabel('R-R intervals')
-title('R-R Plot')
-hold off
-
 %% j division
 % J -> Divide [0,T] into J equal parts
 % delta -> Length of each part in seconds
@@ -72,7 +62,11 @@ f_vec = zeros(1, J); %f() vector
 for j = start_iter:J
     
    % Check for previous spike
-   if(u(k+1) <= j*delta)
+   if(k == length(u))
+       break
+   end
+   
+   if(u(k+1) < j*delta)
        k = k+1;
        integ_f_value = 0;
        integ_df_vector = zeros(1, nparams+2);
@@ -88,6 +82,9 @@ for j = start_iter:J
    
    % Compute f()
    f_vec(j) = f(j, theta_predict(end, j), delta, u(k), mu(j));
+   if (f_vec(j) <= 1e-18)
+       continue
+   end
 %    if (f_vec(j) == Inf)
 %        continue
 %    end
@@ -95,7 +92,7 @@ for j = start_iter:J
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
        u(k), mu(j), theta_predict(end, j), integ_f_value); %check after completing del and update eqs
-   if(integ_f_value <= 1e-3)
+   if(integ_f_value <= 1e-18)
        continue
    end
    % Compute cif
@@ -132,4 +129,17 @@ for j = start_iter:J
    Wvar_update = inv(inv(Wvar_predict) - dsquare_loglambda_mat.*(n(j)...
         - (lambda_vec(j)*delta)) - (d_loglambda_vec * (d_lambda_vec.*delta)')); 
 end
+
+%% R-R plot
+t = 0:1:732;
+figure
+subplot(2,1,1)
+scatter(u, H, '*' , 'r')
+line(u,H)
+%plot(diff(r_peaks), 'r*')
+% xlabel('time in seconds')
+% ylabel('R-R intervals')
+% title('R-R Plot')
+subplot(2,1,2)
+plot(mu)
 
