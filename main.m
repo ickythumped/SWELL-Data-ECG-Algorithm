@@ -37,7 +37,6 @@ sigma_square = zeros(1, J); %variance of each interval
 theta_update = [0.14937830871589303; 1.1564059506167039; -0.39835826229059518; ...
     0.83088601289788633; -1.023213140764317; 0.41452982839565033; -0.26784526179216739; ...
     0.6149154253134137; -0.60566867990517192; 0.11520209772910678; 1507.727429652082];
-%theta_update = [3e-1; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 4e-7; 0]; %intitalizing theta(j|j)
 theta_predict(:, start_iter) = theta_update;
 mu(start_iter) = mean_rate(k, H, nparams, theta_update);
 
