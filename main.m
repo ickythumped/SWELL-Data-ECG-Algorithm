@@ -84,8 +84,11 @@ f_vec = zeros(1, J); %f() vector
 
 for j = start_iter:J
     
+   if(k == length(u))
+       continue
+   end
    % Check for previous spike
-   if(u(k+1) <= j*delta)
+   if(u(k+1) < j*delta)
        k = k+1;
        integ_f_value = 0;
        integ_df_vector = zeros(1, nparams+2);
@@ -101,6 +104,9 @@ for j = start_iter:J
    
    % Compute f()
    f_vec(j) = f(j, theta_predict(end, j), delta, u(k), mu(j));
+   if (f_vec(j) <= 1e-18)
+       continue
+   end
 %    if (f_vec(j) == Inf)
 %        continue
 %    end
@@ -108,10 +114,9 @@ for j = start_iter:J
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
        u(k), mu(j), theta_predict(end, j), integ_f_value); %check after completing del and update eqs
-   if(integ_f_value <= 1e-3)
+   if(integ_f_value <= 1e-18)
        continue
    end
-   
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_value);
    
