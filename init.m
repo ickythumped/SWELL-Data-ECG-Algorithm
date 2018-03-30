@@ -1,20 +1,21 @@
-function [u, K, T, N, H] = init(HR_data, fs, U)
+function [u, K, T, N, H] = init(r_peaks)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
 %R-R peaks in seconds
-u = U./fs;
+u = r_peaks;
 
 %Number of R peaks
-K = length(U); 
+K = length(u); 
 
 % Length of data [0, T]
-T = length(HR_data); 
+t = 1:0.005:160;
+T = length(t); 
 
 % R-peaks vector in samples
-N = zeros(1,length(HR_data)); 
-for i = 1:length(U)
-    N(U(i)) = 1;
+N = zeros(1,T); 
+for i = 1:length(u)
+    N(u(i)) = 1;
 end
 clear i
 
