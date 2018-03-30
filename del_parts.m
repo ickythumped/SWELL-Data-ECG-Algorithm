@@ -12,8 +12,10 @@ J = floor(T/delta);
 % n_j -> binary value for peak in each delta
 n = zeros(1,J); 
 for j = 1:J
-    for k = 1:length(u)
-        if (u(k) >
+    if(u(1) > (j-1)*delta && u(1) <= j*delta)
+        n(j) = 1;
+        u = circshift(u,1,2); 
+    end
 end
 clear j
 
