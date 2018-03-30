@@ -24,7 +24,7 @@ load('r_peaks.mat');
 % J -> Divide [0,T] into J equal parts
 % delta -> Length of each part in seconds
 % n_j -> binary value for peak in each delta
-[J, delta, n] = del_parts(T, u);
+[J, delta, n] = del_parts(T);
 
 %% Parameter initialization
 nparams = 2; %Number of parameters in theta

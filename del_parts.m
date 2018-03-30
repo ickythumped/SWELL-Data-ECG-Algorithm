@@ -1,29 +1,19 @@
-function [J, delta, n] = del_parts(T, fs, N)
+function [J, delta, n] = del_parts(T, u)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 
 %% Computing J, delta
 %Divide [0,T] into J equal parts
-J = floor(T/(fs/4)); 
-
-%Length of each part
-delta_samples = T/J; 
-
-%delta in seconds
-delta = delta_samples/fs;
+delta = 0.005;
+J = floor(T/delta); 
 
 %% Computing n_j
 
 % n_j -> binary value for peak in each delta
 n = zeros(1,J); 
 for j = 1:J
-    for c = ((j-1)*delta_samples)+1:j*delta_samples
-        if (N(c) == 1)
-            n(j) = 1;
-            break;
-        end
-    end
-    clear c
+    for k = 1:length(u)
+        if (u(k) >
 end
 clear j
 
