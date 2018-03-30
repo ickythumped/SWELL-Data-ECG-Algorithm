@@ -21,7 +21,21 @@ xlabel('time in seconds')
 ylabel('R-R intervals')
 title('R-R Plot')
 hold off
+%% Downsampling
+r = 1;
+fs = totalData1.fs/r;
+%HR_data = decimate(HR_data1, r);
+HR_data = HR_data1(1 : (floor(length(HR_data1)/fs))*fs);
 
+% R-R plot
+figure
+hold on
+scatter(u, H, '*' , 'r')
+line(u, H)
+xlabel('time in seconds')
+ylabel('R-R intervals')
+title('R-R Plot')
+hold off
 %% j division
 % J -> Divide [0,T] into J equal parts
 % delta -> Length of each part in seconds
