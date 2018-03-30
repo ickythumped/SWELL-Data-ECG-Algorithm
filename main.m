@@ -12,7 +12,7 @@ load('r_peaks.mat');
 [u, K, T, N, H] = init(r_peaks);
 % syms t; %variable for computing integ_f & integ_df
 
-% R-R plot
+%% R-R plot
 figure
 hold on
 scatter(u, H, '*' , 'r')
