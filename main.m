@@ -65,12 +65,9 @@ theta_update = [0.14937830871589303; 1.1564059506167039; -0.39835826229059518; .
 theta_predict(:, start_iter) = theta_update;
 mu(start_iter) = mean_rate(k, H, nparams, theta_update);
 
-theta_update = [3e-1; 4e-7; 4e-7; 0]; %intitalizing theta(j|j)
-theta_predict(:, start_iter) = theta_update;
-mu(start_iter) = mean_rate(k, H, nparams, theta_update);
-sigma_square(start_iter) = 0.04;
-theta_predict(nparams+2, start_iter) = mu(start_iter)^3./sigma_square(start_iter);
-theta_update(nparams+2) = mu(start_iter)^3./sigma_square(start_iter);
+
+%sigma_square(start_iter) = 0.04;
+
 covar_matrix = diag(theta_update);
 Wvar_predict = ones(nparams+2, nparams+2); %Model parameter vector
 Wvar_update = covar_matrix; %Model parameter vector
