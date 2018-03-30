@@ -11,23 +11,23 @@ load('r_peaks.mat');
 [u, K, T, H] = init(r_peaks);
 
 %% R-R plot
-% figure
-% hold on
-% scatter(u, H, '*' , 'r')
-% line(u, H)
-% xlabel('time in seconds')
-% ylabel('R-R intervals')
-% title('R-R Plot')
-% hold off
+figure
+hold on
+scatter(u, H, '*' , 'r')
+line(u, H)
+xlabel('time in seconds')
+ylabel('R-R intervals')
+title('R-R Plot')
+hold off
 
 %% j division
 % J -> Divide [0,T] into J equal parts
 % delta -> Length of each part in seconds
 % n_j -> binary value for peak in each delta
-[J, delta, n] = del_parts(T);
+[J, delta, n] = del_parts(T, u);
 
 %% Parameter initialization
-nparams = 2; %Number of parameters in theta
+nparams = 8; %Number of parameters in theta
 
 %wait for 'p' previous spikes
 k = 0;
@@ -90,7 +90,9 @@ for j = start_iter:J
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
        u(k), mu(j), theta_predict(end, j), integ_f_value); %check after completing del and update eqs
-   
+   if(integ_f_value <= 1e-3)
+       continue
+   end
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_value);
    
