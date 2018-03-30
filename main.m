@@ -59,10 +59,10 @@ mu = zeros(1, J); %mean of each interval
 sigma_square = zeros(1, J); %variance of each interval
 
 %% Initializations (Note: work to be done)
-theta_update = [0.834; -0.15; -0.25; 0]; %intitalizing theta(j|j)
+theta_update = [3e-1; 4e-7; 4e-7; 0]; %intitalizing theta(j|j)
 theta_predict(:, start_iter) = theta_update;
 mu(start_iter) = mean_rate(k, H, nparams, theta_update);
-sigma_square(start_iter) = 0.00075;
+sigma_square(start_iter) = 0.04;
 theta_predict(nparams+2, start_iter) = mu(start_iter)^3./sigma_square(start_iter);
 theta_update(nparams+2) = mu(start_iter)^3./sigma_square(start_iter);
 covar_matrix = diag(theta_update);
