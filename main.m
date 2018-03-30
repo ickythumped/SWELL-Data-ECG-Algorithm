@@ -144,10 +144,10 @@ for j = start_iter:J
 end
 
 %% R-R plot
-t = (1*delta:length(mu))*delta;
+t = (1:length(mu))*delta;
 figure
 hold on
-plot(u, H, 'r*')
+plot(u, H, 'r.')
 %line(u, H)
 plot(t, mu)
 xlabel('time in seconds')
