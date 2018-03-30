@@ -67,8 +67,8 @@ mu(start_iter) = mean_rate(k, H, nparams, theta_update);
 
 
 %sigma_square(start_iter) = 0.04;
-
-covar_matrix = diag(theta_update);
+covar = [3e-7; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13];
+covar_matrix = diag(covar);
 Wvar_predict = ones(nparams+2, nparams+2); %Model parameter vector
 Wvar_update = covar_matrix; %Model parameter vector
 
@@ -152,3 +152,5 @@ for j = start_iter:J
         - (lambda_vec(j)*delta)) - (d_loglambda_vec * (d_lambda_vec.*delta)')); 
 end
 
+figure
+plot(mu)
