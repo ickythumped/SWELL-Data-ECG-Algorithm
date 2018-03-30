@@ -90,7 +90,9 @@ for j = start_iter:J
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
        u(k), mu(j), theta_predict(end, j), integ_f_value); %check after completing del and update eqs
-   
+   if(integ_f_value <= 1e-3)
+       continue
+   end
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_value);
    
