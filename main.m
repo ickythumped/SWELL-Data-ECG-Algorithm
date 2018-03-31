@@ -143,7 +143,6 @@ for j = start_iter:J
         - (lambda_vec(j)*delta)) - (d_loglambda_vec * (d_lambda_vec.*delta)')); 
 end
 
-=======
 %% R-R plot
 t = (1:length(mu))*delta;
 figure
