@@ -1,6 +1,5 @@
 function [f_val] = f(j, theta_p_plus1, delta, u_val, mu_val)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%Calculating f() for History dependent Inverse Gaussian Distribution
 
 %% PDF approach
 % lambda_idg = theta_p_plus1;

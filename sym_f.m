@@ -1,5 +1,5 @@
 function [f_eq] = sym_f(t, theta_p_plus1, u_val, mu_val)
-%Symbolic equation for f() in order to compute integ_f()
+%handler function 
 
 expr1 = theta_p_plus1;
 expr2 = t - u_val;

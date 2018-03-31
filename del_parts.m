@@ -1,6 +1,5 @@
 function [J, delta, n] = del_parts(T, fs, N)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+%Dividing [0,T] into J intervals
 
 %% Computing J, delta
 %Divide [0,T] into J equal parts

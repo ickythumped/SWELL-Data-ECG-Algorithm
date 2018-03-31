@@ -1,7 +1,6 @@
 function [dsquaref_mat] = dsquaref(j, delta, k, nparams, u_val, H,...
     mu_val, f_val, df_vec, theta_p_plus1)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+% Calculating 2nd derivative of f() with respect to theta 
 
 %% intializations
 dsquaref_reg1_mat = zeros(nparams+1, nparams+1);

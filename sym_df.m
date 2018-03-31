@@ -1,7 +1,6 @@
 function [sym_df_val] = sym_df(i, t, k, nparams,...
     u_val, H, mu_val, f_val, theta_p_plus1)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%handler function
 
 expr1 = (f_val*theta_p_plus1)./(mu_val^3);
 expr2 = (t - u_val - mu_val);

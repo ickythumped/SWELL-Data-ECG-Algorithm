@@ -1,7 +1,6 @@
 function [dsquare_loglambda_mat] = dsquare_loglambda(nparams, lambda_val, dlambda_vec,...
     dsquare_lambda_mat)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+% Calculating 2nd derivative of log(lambda) with respect to theta 
 
 dsquare_loglambda_mat = zeros(nparams+2, nparams+2);
 for i = 1:nparams+2

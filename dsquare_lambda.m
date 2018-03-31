@@ -1,7 +1,6 @@
 function [dsquare_lambda_mat] = dsquare_lambda(nparams, f_val, integ_f_val, ...
     d_lambda_vec, df_vec, integ_df_vec, dsquaref_mat, integ_dfsquare_mat) 
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+% Calculating 2nd derivative of lambda with respect to theta 
 
 dsquare_lambda_mat = zeros(nparams+2, nparams+2);
 expr1 = 1/(1 - integ_f_val);

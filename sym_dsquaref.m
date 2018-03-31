@@ -1,7 +1,6 @@
 function [sym_dsquaref_val] = sym_dsquaref(a, b, t, k, nparams, u_val, H,...
     mu_val, f_val, df_vec, theta_p_plus1)
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%handler function
 
 %% reg1
 expr1 = t - u_val;

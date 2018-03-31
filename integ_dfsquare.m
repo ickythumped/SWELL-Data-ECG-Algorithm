@@ -1,7 +1,6 @@
 function [integ_dfsquare_mat] = integ_dfsquare(j, delta, k, nparams, u_val, H,...
     mu_val, f_val, df_vec, theta_p_plus1)
-%UNTITLED6 Summary of this function goes here
-%   Detailed explanation goes here
+%Calculating integral of d2(f)/dtheta
 
 integ_dfsquare_mat = zeros(nparams+2, nparams+2);
 for a = 1:nparams+2

@@ -1,6 +1,10 @@
+%%Run this file.
+
 clear all; %#ok<CLALL>
 close all;
 clc;
+
+%Set the address of file
 [totalData1, HR_data1, ~] = myDoReadData("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp1_18-9-2012_c1.S00");
 
 %% Downsampling
@@ -49,7 +53,6 @@ theta_predict = zeros(nparams + 2, J); %Model parameter vector (j|j-1)
 mu = zeros(1, J); %mean of each interval
 sigma_square = zeros(1, J); %variance of each interval
 
-%% Initializations (Note: work to be done)
 theta_update = [0.14937830871589303; 1.1564059506167039; -0.39835826229059518; ...
     0.83088601289788633; -1.023213140764317; 0.41452982839565033; -0.26784526179216739; ...
     0.6149154253134137; -0.60566867990517192; 0.11520209772910678; 1507.727429652082];
@@ -98,9 +101,6 @@ for j = start_iter:J
    if (f_vec(j) <= 1e-18)
        continue
    end
-%    if (f_vec(j) == Inf)
-%        continue
-%    end
    
    % Compute sym_f() and integ_f()
    integ_f_value = integ_f_value + integ_f(j, delta, ...
@@ -108,6 +108,7 @@ for j = start_iter:J
    if(integ_f_value <= 1e-18)
        continue
    end
+   
    % Compute cif
    lambda_vec(j) = cif(f_vec(j), integ_f_value);
    

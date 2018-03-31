@@ -1,6 +1,5 @@
 function [mean_val] = mean_rate(k, history_vec, num_params, theta_j_vec)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%Calculating mean heart rate
 
 mean_val = theta_j_vec(1);
 for i = 2:num_params+1

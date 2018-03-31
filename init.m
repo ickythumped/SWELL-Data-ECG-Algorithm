@@ -1,6 +1,5 @@
 function [u, K, T, N, H] = init(HR_data, fs, U)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%Initializing required vectors
 
 %R-R peaks in seconds
 u = U./fs;
