@@ -71,8 +71,8 @@ integ_dfsquare_matrix = zeros(nparams+2, nparams+2);
 % Paramter initializations
 lambda_vec = zeros(1, J); % lambda vector
 f_vec = zeros(1, J); %f() vector
-%% Algorithm with adaptive filter
 
+%% Algorithm with adaptive filter
 for j = start_iter:J
     
    if(k == length(u))
