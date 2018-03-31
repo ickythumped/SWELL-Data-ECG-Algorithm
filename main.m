@@ -130,15 +130,19 @@ for j = start_iter:J
 end
 
 %% R-R plot
-t = 0:1:732;
+t = (1:length(mu))*delta;
 figure
-subplot(2,1,1)
-scatter(u, H, '*' , 'r')
-line(u,H)
-%plot(diff(r_peaks), 'r*')
-% xlabel('time in seconds')
-% ylabel('R-R intervals')
-% title('R-R Plot')
-subplot(2,1,2)
-plot(mu)
+hold on
+plot(u, H, 'r.')
+%line(u, H)
+plot(t, mu)
+xlabel('time in seconds')
+ylabel('R-R intervals')
+title('R-R Plot')
+hold off
+
+%% Mu_value
+final_mean = mean(mu);
+disp(final_mean);
+disp(mean(H));
 
