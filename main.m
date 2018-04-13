@@ -61,7 +61,7 @@ mu(start_iter) = mean_rate(k, H, nparams, theta_update);
 
 
 %sigma_square(start_iter) = 0.04;
-covar = [3e-7; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13];
+covar = [3e-7; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 4e-13; 0.0039];
 covar_matrix = diag(covar);
 Wvar_predict = ones(nparams+2, nparams+2); %Model parameter vector
 Wvar_update = covar_matrix; %Model parameter vector
