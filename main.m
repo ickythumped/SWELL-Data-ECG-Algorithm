@@ -5,7 +5,7 @@ close all;
 clc;
 
 %Set the address of file
-[totalData1, HR_data1, ~] = myDoReadData("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp2_19-9-2012_c3.S00");
+[totalData1, HR_data1, ~] = myDoReadData("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp23_1-11-2012_c1.S00");
 
 %% Downsampling
 r = 1;
@@ -17,7 +17,7 @@ HR_data = HR_data1(1 : (floor(length(HR_data1)/fs))*fs);
 % U -> Location of R-peaks in samples
 % For accurate identification of peaks please select appropriate value for
 % ...MinPeakHeight & MinPeakDistance
-MinPeakHeight = 400;
+MinPeakHeight = 200;
 MinPeakDistance = 1/4;
 [~, U] = peakfinder(HR_data, fs, MinPeakHeight, MinPeakDistance);
 
