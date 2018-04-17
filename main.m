@@ -5,7 +5,7 @@ close all;
 clc;
 
 %Set the address of file
-[totalData1, HR_data1, ~] = myDoReadData("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp23_1-11-2012_c1.S00");
+[totalData1, HR_data1, ~] = myDoReadData("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp7_2-10-2012_c3.S00");
 
 %% Downsampling
 r = 1;
@@ -153,14 +153,28 @@ plot(u, H, 'r.')
 plot(t, mu)
 xlabel('time in seconds')
 ylabel('R-R intervals')
-title('R-R Plot')
+title('Heart rate in bpm')
 hold off
 
-%% Mu_value
+%% Shifted graph 
 final_mean = mean(mu);
 disp(final_mean);
 disp(mean(H));
 X = randn*0.01;
 est_mu = mean(H) + X;
 disp(est_mu)
+
+temp1 = final_mean - mean(H);
+temp2 = temp1 + X; 
+shifted_mean = final_mean - temp2;
+shifted_muvec = mu - shifted_mean;
+
+figure
+plot(t, shifted_muvec)
+xlabel('time in seconds')
+ylabel('R-R intervals in bpm')
+title('Heart rate in Interruptions condition')
+ax = gca;
+ax.FontSize = 16;
+ax.YLim = [0 2];
 
