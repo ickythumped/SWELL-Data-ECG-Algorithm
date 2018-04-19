@@ -108,8 +108,9 @@ for j = start_iter:J
    end
    
    % Compute sym_f() and integ_f()
-   integ_f_value = integ_f_value + integ_f(j, delta, ...
-       u(k), mu(j), theta_predict(end, j), integ_f_value); %check after completing del and update eqs
+   integ_f_temp = integ_f(j, delta, ...
+       u(k), mu(j), theta_predict(end, j), integ_f_value);
+   integ_f_value = integ_f_value + integ_f_temp; 
    if(integ_f_value <= 1e-28)
        continue
    end
@@ -167,10 +168,10 @@ hold off
 final_mean = mean(mu);
 disp(final_mean);
 disp(mean(H));
-X = randn*0.01;
+X = randn*0.0001;
 
 temp1 = final_mean - mean(H);
-temp2 = temp1 + X; 
+temp2 = temp1; 
 % shifted_mean = final_mean - temp2;
 shifted_muvec = mu - temp2;
 shifted_muvec(shifted_muvec < 0) = 0.1;
@@ -220,7 +221,7 @@ ylabel('mean HR in bpm')
 title('Heart rate in Interruptions condition')
 ax = gca;
 ax.FontSize = 16;
-ax.YLim = [0 200];
+ax.YLim = [0 150];
 
 figure
 plot(t, std_hrv)
@@ -229,4 +230,4 @@ ylabel('standard deviation of HR in bpm')
 title('standard deviation of HR in Interruptions condition')
 ax = gca;
 ax.FontSize = 16;
-%ax.YLim = [0 0.1125];
+ax.YLim = [0 3];
