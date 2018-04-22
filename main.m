@@ -14,7 +14,6 @@ fs = totalData1.fs/r;
 %HR_data = decimate(HR_data1, r);
 HR_data = HR_data1(1 : (floor(length(HR_data1)/fs))*fs);
 
-
 %% Locating and Plotting R-R peaks
 % U -> Location of R-peaks in samples
 % For accurate identification of peaks please select appropriate value for
@@ -156,9 +155,9 @@ end
 t = (1:length(mu))*delta;
 figure
 hold on
-plot(u, H, 'r.')
+plot(u, H)
 %line(u, H)
-plot(t, mu)
+%plot(t, mu)
 xlabel('time in seconds')
 ylabel('R-R intervals')
 title('R-R intervals in Interruptions condition')
