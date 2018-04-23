@@ -155,9 +155,9 @@ end
 t = (1:length(mu))*delta;
 figure
 hold on
-plot(u, H)
+plot(u, H, 'r*')
 %line(u, H)
-%plot(t, mu)
+plot(t, mu)
 xlabel('time in seconds')
 ylabel('R-R intervals')
 title('R-R intervals in Interruptions condition')
@@ -234,6 +234,6 @@ ax.YLim = [0 3];
 
 
 %% file write
-fileID = fopen('rr_peaks.txt','w');
+fileID = fopen('rr_peaks_pp7-I.txt','w');
 fprintf(fileID,'%4.4f\r\n', u');
 fclose(fileID);
