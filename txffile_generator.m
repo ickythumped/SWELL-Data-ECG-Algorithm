@@ -6,7 +6,7 @@ clc;
 
 %Set the address of file
 [totalData1, HR_data1, ~] = myDoReadData...
-    ("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp1_c2.S00");
+    ("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp1_c3.S00");
 
 %% Downsampling
 r = 1;
@@ -33,6 +33,6 @@ MinPeakDistance = 1/4;
 % syms t; %variable for computing integ_f & integ_df
 
 %% file write
-fileID = fopen('D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\rr_peaks_pp1-T.txt','w');
+fileID = fopen('D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\rr_peaks_pp1-I.txt','w');
 fprintf(fileID,'%4.4f\r\n', u');
 fclose(fileID);

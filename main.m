@@ -183,7 +183,7 @@ xlabel('time in seconds')
 ylabel('mean R-R intervals')
 title('mean of R-R intervals in Interruptions condition')
 ax = gca;
-ax.FontSize = 16;
+ax.FontSize = 18;
 %ax.YLim = [0 2];
 
 
