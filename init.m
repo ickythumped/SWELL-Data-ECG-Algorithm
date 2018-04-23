@@ -19,7 +19,7 @@ clear i
 
 % History dependence vector
 H = [u(1) diff(u)]; 
-%H(H > 1.5) = 1;
+%H(H > 1.2) = 1;
 
 end
 
