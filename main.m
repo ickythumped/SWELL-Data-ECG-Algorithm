@@ -6,7 +6,7 @@ clc;
 
 %Set the address of file
 [totalData1, HR_data1, ~] = myDoReadData...
-    ("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp2_c1.S00");
+    ("D:\4th sem\Physiological Signal Processing\SWELL Dataset\Data\pp7_c3.S00");
 
 %% Downsampling
 r = 1;
@@ -184,7 +184,7 @@ ylabel('mean R-R intervals')
 title('mean of R-R intervals in Interruptions condition')
 ax = gca;
 ax.FontSize = 18;
-%ax.YLim = [0 2];
+ax.YLim = [0 1.6];
 
 
 % std plot
@@ -194,40 +194,40 @@ xlabel('time in seconds')
 ylabel('standard deviation of R-R')
 title('standard deviation in Interruptions condition')
 ax = gca;
-ax.FontSize = 16;
-%ax.YLim = [0 0.1125];
+ax.FontSize = 18;
+ax.YLim = [0 0.12];
 
 
 %% Heart Rate 
-mu_temp = shifted_muvec/60;
-theta_temp = theta_predict(nparams+2, :)./60;
-mu_temp(mu_temp < 0) = 0;
-theta_temp(theta_temp < 0) = 0;
-
-mu_hrv = mu_temp.^(-1) + theta_temp.^(-1);
-mu_hrv(mu_hrv == Inf) = 0;
-
-std_temp1 = 2.*mu_temp + theta_temp;
-std_temp2 = mu_temp.*(theta_temp.^2);
-std_hrv = (std_temp1./std_temp2).^0.5;
-
-
-disp(mean(mu_hrv));
-
-figure
-plot(t, mu_hrv)
-xlabel('time in seconds')
-ylabel('mean HR in bpm')
-title('Heart rate in Interruptions condition')
-ax = gca;
-ax.FontSize = 16;
-ax.YLim = [0 150];
-
-figure
-plot(t, std_hrv)
-xlabel('time in seconds')
-ylabel('standard deviation of HR in bpm')
-title('standard deviation of HR in Interruptions condition')
-ax = gca;
-ax.FontSize = 16;
-ax.YLim = [0 3];
+% mu_temp = shifted_muvec/60;
+% theta_temp = theta_predict(nparams+2, :)./60;
+% mu_temp(mu_temp < 0) = 0;
+% theta_temp(theta_temp < 0) = 0;
+% 
+% mu_hrv = mu_temp.^(-1) + theta_temp.^(-1);
+% mu_hrv(mu_hrv == Inf) = 0;
+% 
+% std_temp1 = 2.*mu_temp + theta_temp;
+% std_temp2 = mu_temp.*(theta_temp.^2);
+% std_hrv = (std_temp1./std_temp2).^0.5;
+% 
+% 
+% disp(mean(mu_hrv));
+% 
+% figure
+% plot(t, mu_hrv)
+% xlabel('time in seconds')
+% ylabel('mean HR in bpm')
+% title('Heart rate in Interruptions condition')
+% ax = gca;
+% ax.FontSize = 18;
+% ax.YLim = [0 150];
+% 
+% figure
+% plot(t, std_hrv)
+% xlabel('time in seconds')
+% ylabel('standard deviation of HR in bpm')
+% title('standard deviation of HR in Interruptions condition')
+% ax = gca;
+% ax.FontSize = 18;
+% ax.YLim = [0 3];
